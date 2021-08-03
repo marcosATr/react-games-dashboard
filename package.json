@@ -16,5 +16,11 @@
   },
   "devDependencies": {
     "react-scripts": "latest"
-  }
+  },
+  "buildpacks": [
+    {
+      "url": "mars/create-react-app"
+    }
+  ],
+
 }

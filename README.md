@@ -1,3 +1,4 @@
-# react-dipxug
+# Upcoming games Dashboard built with react!
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-dipxug)
+
+Check it out on  [StackBlitz ⚡️](https://react-dipxug.stackblitz.io/)
