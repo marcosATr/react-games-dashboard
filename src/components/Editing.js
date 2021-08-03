@@ -56,8 +56,8 @@ const Editing = () => {
 
   return (
     <>
-      <div className="box flex column p2">
-        <div className="flex column wrap center p2 nearWhite formPage">
+      <div className="box flex center column p2">
+        <div className="flex column center p2 nearWhite formPage">
           <h1 className="font-large bold">Editar jogo:</h1>
           <p>Id atual: {activeGame.id}</p>
           <div className="registerPage">

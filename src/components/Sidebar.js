@@ -43,7 +43,7 @@ function Sidebar({ visible, toggleSidebar }) {
         <div className="mt2 p2 border-right-animated">
           <GiGameConsole className="nearWhite va-middle" />
           <span className="nearWhite bold uppercase ml1 va-middle">
-            Platforms
+            Platformas
           </span>
           <AsideNav name="Platform" links={platforms} />
         </div>
