@@ -1,0 +1,23 @@
+.registerPage {
+  width: 100%;
+  margin: 1rem;
+}
+.registerPage .inputBasic {
+  max-width: 570px;
+  min-width: 420px;
+  display: flex;
+  margin: 10px auto;
+  padding: 1rem;
+}
+.registerFormHolder {
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .registerPage {
+    width: 100%;
+  }
+  .registerPage .inputBasic {
+    min-width: 80%;
+  }
+}

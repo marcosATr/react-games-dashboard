@@ -1,0 +1,37 @@
+.tableWrapper {
+  background-color: white;
+  border-radius: 5px;
+  position: relative;
+}
+.table {
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  border-bottom: 1px solid #ddd;
+  padding: 1rem;
+  text-align: left;
+}
+.table td {
+  font-size: 0.9rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.table tr:last-child td {
+  border-bottom: 0;
+}
+@media (max-width: 768px) {
+  .table {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .table th {
+    padding: 0.5rem;
+  }
+  .table td {
+    padding: 1rem;
+  }
+  /* .tableWrapper {
+    margin: 2rem;
+  } */
+}

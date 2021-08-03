@@ -1,0 +1,48 @@
+aside {
+  height: 100vh;
+  width: 16rem;
+  background-color: var(--main-bg-color);
+  scrollbar-width: none;
+  overflow-y: auto;
+  position: fixed;
+}
+aside a {
+  text-decoration: none;
+}
+.logo {
+  font-size: 1.5rem;
+}
+.logo svg {
+  margin-right: 1rem;
+}
+.filterSection {
+  height: 5rem;
+}
+.border-right-animated:hover {
+  border-right: 3px solid white;
+  transition: all ease-out 0.2s;
+}
+
+/* .sidebarReveal {
+  display: flex;
+} */
+
+.sidebar {
+  display: flex;
+}
+.height-equalizer {
+  height: 5rem;
+  align-items: center;
+  padding: 2rem;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .sidebarReveal {
+    display: flex;
+    width: 100%;
+    z-index: 4;
+    position: absolute;
+  }
+}

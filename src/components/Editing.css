@@ -1,0 +1,19 @@
+.formPage .inputBasic {
+  max-width: 570px;
+  min-width: 420px;
+  display: flex;
+  padding: 1rem;
+}
+/* .registerFormHolder {
+  padding: 1rem;
+} */
+
+@media (max-width: 768px) {
+  .formPage .inputBasic {
+    min-width: 100%;
+  }
+  .button.mh2 {
+    margin-left: 0;
+    margin-right: 0.7rem;
+  }
+}

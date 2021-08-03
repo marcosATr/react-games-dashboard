@@ -1,0 +1,19 @@
+.topbar-nav {
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.logo {
+  text-decoration: none;
+}
+.menuHolder {
+  z-index: 10;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .topbar-nav {
+    justify-content: space-between;
+  }
+}
