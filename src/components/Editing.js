@@ -1,48 +1,55 @@
-import React, { useState, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import './Editing.css';
-
-
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import "./Editing.css";
 
 const Editing = () => {
+  const BASEURL = "https://express-games-backend-rest-api.herokuapp.com/";
+
+  const [games, setGames] = useState([]);
+
   //controlling action edit action
   const [editStatus, setEditStatus] = useState(false);
 
   const { id } = useParams();
-  let editingIndex;
-
-  const findMatch = () => {
-    const results = games.filter((game, index) => {
-      if (game.id == id) {
-        editingIndex = index;
-        return game;
-      }
-    });
-    return results;
+  const loadGames = async () => {
+    const res = await fetch(`${BASEURL}${id}`);
+    const gameData = await res.json();
+    setGames([{ ...gameData }]);
   };
-  const [activeGame] = findMatch();
-  const [tempEdit, setTempEdit] = useState({ ...activeGame });
+  
+  useEffect(() => {
+    loadGames();
+  }, []);
+  
+const game = games[0]
 
-  const editItem = e => {
-    setTempEdit({
-      ...tempEdit,
-      [e.target.name]: e.target.value
-    });
+  const editItem = (e) => {
+    setGames([{
+      ...game,
+      [e.target.name]: e.target.value,
+    }]);
   };
 
-  const saveItem = operation => {
+  const saveItem = async (operation) => {
     //removing the item that is being edited:
-    const newGames = games.filter((game, index) => {
-      if (game.id != tempEdit.id) {
-        return game;
-      }
-    });
-    if (operation == 'save') {
-      newGames.push(tempEdit);
-      setGames(newGames);
+
+    if (operation == "save") {
+      // newGames.push(tempEdit);
+      // setGames(newGames);
       setEditStatus(true);
-    } else if (operation == 'delete') {
-      setGames(newGames);
+      await fetch(`${BASE_URL}${id}/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...tempEdit,
+        }),
+      });
+    } else if (operation == "delete") {
+      await fetch(`${BASE_URL}${id}`, {
+        method: "DELETE",
+      });
     }
   };
 
@@ -59,15 +66,15 @@ const Editing = () => {
       <div className="box flex center column p2">
         <div className="flex column center p2 nearWhite formPage">
           <h1 className="font-large bold">Editar jogo:</h1>
-          <p>Id atual: {activeGame.id}</p>
+          <p>Id atual: {id}</p>
           <div className="registerPage">
             <input
               className="inputBasic mv1"
               placeholder="Nome do Jogo"
               type="text"
               name="title"
-              value={tempEdit.title}
-              onChange={e => {
+              value={games[0].title}
+              onChange={(e) => {
                 editItem(e);
               }}
             />
@@ -78,8 +85,8 @@ const Editing = () => {
               placeholder="Gênero"
               type="text"
               name="genre"
-              value={tempEdit.genre}
-              onChange={e => {
+              value={game.genre}
+              onChange={(e) => {
                 editItem(e);
               }}
             />
@@ -90,8 +97,8 @@ const Editing = () => {
               placeholder="Plataforma"
               type="text"
               name="platform"
-              value={tempEdit.platform}
-              onChange={e => {
+              value={game.platform}
+              onChange={(e) => {
                 editItem(e);
               }}
             />
@@ -102,8 +109,8 @@ const Editing = () => {
               placeholder="Data Prevista"
               type="text"
               name="release"
-              value={tempEdit.release}
-              onChange={e => {
+              value={game.release}
+              onChange={(e) => {
                 editItem(e);
               }}
             />
@@ -119,7 +126,7 @@ const Editing = () => {
               to=""
               className="button mh2"
               onClick={() => {
-                saveItem('save');
+                saveItem("save");
               }}
             >
               Atualizar
@@ -128,7 +135,7 @@ const Editing = () => {
               to="/"
               className="button mh2"
               onClick={() => {
-                saveItem('delete');
+                saveItem("delete");
               }}
             >
               Delete
