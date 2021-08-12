@@ -1,12 +1,23 @@
-import React, { useState, useContext } from 'react';
-import { GameDataContext } from '../UserContext.js';
-import { Link } from 'react-router-dom';
-import './Table.css';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./Table.css";
 
 function Table() {
-  //consume the values and methods shared via provider
-  const { games, setGames } = useContext(GameDataContext);
-  console.log(games);
+  const BASEURL = "https://express-games-backend-rest-api.herokuapp.com/";
+
+  const [games, setGames] = useState([]);
+
+  const loadGames = async () => {
+    const res = await fetch(BASEURL);
+    const gameData = await res.json();
+    setGames(gameData);
+    console.log(gameData.length);
+  };
+
+  useEffect(() => {
+    loadGames();
+  }, []);
+
   return (
     <>
       <div className="box mv2 small-overflow-scroll z1">
@@ -20,10 +31,10 @@ function Table() {
             </tr>
           </thead>
           <tbody className="font-small">
-            {games.map(game => (
+            {games.map((game) => (
               <tr key={game.id}>
                 <td>
-                  <Link to={`/${game.id}`}>{game.title}</Link>
+                  <Link to={`/${game._id}`}>{game.title}</Link>
                 </td>
                 <td>{game.genre}</td>
                 <td>{game.platform}</td>

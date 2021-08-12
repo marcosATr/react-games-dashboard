@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import './ListSingle.css';
-import { GameDataContext } from '../UserContext.js';
+
 import { Link } from 'react-router-dom';
 
 const ListSingle = () => {
-  const { games } = useContext(GameDataContext);
+
   const { id } = useParams();
 
   const findMatch = () => {

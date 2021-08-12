@@ -1,53 +1,66 @@
-import React, { useState, useContext } from 'react';
-import { GameDataContext } from '../UserContext.js';
-import { Link } from 'react-router-dom';
-import './Register.css';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./Register.css";
 
 const Register = () => {
-  const { games, setGames } = useContext(GameDataContext);
   const [status, setStatus] = useState(null);
   //status of the from
+  const BASEURL = "https://express-games-backend-rest-api.herokuapp.com/";
+
+  // const [games, setGames] = useState([]);
+
+  // const loadGames = async () => {
+  //   const res = await fetch(BASEURL);
+  //   const gameData = await res.json();
+  //   setGames(gameData);
+  //   console.log(gameData.length);
+  // };
+
+  // useEffect(() => {
+  //   loadGames();
+  // }, []);
 
   //Finding the next available id:
-  const allRegisteredIds = games.map(game => {
-    return game.id;
-  });
+  // const allRegisteredIds = games.map(game => {
+  //   return game.id;
+  // });
 
-  const findAvailable = () => {
-    let nextId;
-    const length = allRegisteredIds.length;
-    for (let i = 1; i <= length + 1; i++) {
-      if (allRegisteredIds.includes(i)) {
-      } else {
-        nextId = i;
-      }
-    }
-    return nextId;
-  };
+  // const findAvailable = () => {
+  //   let nextId;
+  //   const length = allRegisteredIds.length;
+  //   for (let i = 1; i <= length + 1; i++) {
+  //     if (allRegisteredIds.includes(i)) {
+  //     } else {
+  //       nextId = i;
+  //     }
+  //   }
+  //   return nextId;
+  // };
 
   //monitoring and getting fields data
   const [newItem, setNewItem] = useState({});
-  const updateNewItem = e => {
+  const updateNewItem = (e) => {
     setNewItem({
-      id: findAvailable(),
       ...newItem,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  console.log(newItem);
-
-  //submit data do main data.
-  const submitGame = () => {
+  const submitGame = async () => {
     const newItemLenght = Object.values(newItem).length;
-    if (newItemLenght < 5) {
+    console.log(newItemLenght);
+    if (newItemLenght < 4) {
       setStatus(false);
     } else {
-      const updatedGames = [...games, newItem];
-      setGames(updatedGames);
       setStatus(true);
+      await fetch(`${BASEURL}cadastrar`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newItem),
+      });
     }
-    console.log(newItemLenght, status);
   };
 
   //submit warning
@@ -73,6 +86,7 @@ const Register = () => {
       );
     }
   };
+
   return (
     <div className="registerFormHolder flex column center">
       <h1 className="font-large nearWhite bold">Cadastrar Novo Jogo:</h1>
@@ -83,7 +97,7 @@ const Register = () => {
           type="text"
           name="title"
           required
-          onChange={e => {
+          onChange={(e) => {
             updateNewItem(e);
           }}
         />
@@ -95,7 +109,7 @@ const Register = () => {
           type="text"
           name="genre"
           required
-          onChange={e => {
+          onChange={(e) => {
             updateNewItem(e);
           }}
         />
@@ -107,7 +121,7 @@ const Register = () => {
           type="text"
           name="platform"
           required
-          onChange={e => {
+          onChange={(e) => {
             updateNewItem(e);
           }}
         />
@@ -119,7 +133,7 @@ const Register = () => {
           type="text"
           name="release"
           required
-          onChange={e => {
+          onChange={(e) => {
             updateNewItem(e);
           }}
         />
@@ -130,5 +144,4 @@ const Register = () => {
     </div>
   );
 };
-
 export default Register;

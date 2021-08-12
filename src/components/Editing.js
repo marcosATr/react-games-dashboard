@@ -2,12 +2,12 @@ import React, { useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './Editing.css';
 
-import { GameDataContext } from '../UserContext.js';
+
 
 const Editing = () => {
   //controlling action edit action
   const [editStatus, setEditStatus] = useState(false);
-  const { games, setGames } = useContext(GameDataContext);
+
   const { id } = useParams();
   let editingIndex;
 
