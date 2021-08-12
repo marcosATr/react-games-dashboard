@@ -15,11 +15,11 @@ export default function App() {
   const [sidebarVisibility, setSidebarVisibility] = useState(false);
   //display and manipulate the data with useState
   const [games, setGames] = useState(data);
-  console.log(useState(''));
+  console.log(useState(games));
   return (
     <>
       <Router>
-        {/* pass the useState data as values of the provider context !important */}
+
         <GameDataContext.Provider value={{ games, setGames }}>
           <div className="flex">
             <Sidebar

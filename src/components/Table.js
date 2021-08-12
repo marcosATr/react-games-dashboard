@@ -6,7 +6,7 @@ import './Table.css';
 function Table() {
   //consume the values and methods shared via provider
   const { games, setGames } = useContext(GameDataContext);
-  // console.log(games);
+  console.log(games);
   return (
     <>
       <div className="box mv2 small-overflow-scroll z1">
@@ -19,7 +19,7 @@ function Table() {
               <th>Release Date</th>
             </tr>
           </thead>
-          <tbody className="foont-small">
+          <tbody className="font-small">
             {games.map(game => (
               <tr key={game.id}>
                 <td>

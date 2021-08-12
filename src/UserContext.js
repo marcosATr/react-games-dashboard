@@ -1,28 +1,13 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
-const data = [
-  {
-    id: 1,
-    title: 'Upcoming game 1',
-    genre: 'rpg',
-    platform: 'xbox',
-    release: 'March 2021'
-  },
-  {
-    id: 2,
-    title: 'Upcoming game 2',
-    genre: 'mmo',
-    platform: 'ps5',
-    release: 'April 2023'
-  },
-  {
-    id: 3,
-    title: 'Upcoming game 3',
-    genre: 'shooter',
-    platform: 'xbox',
-    release: 'December 2021'
-  }
-];
+const BASEURL = "https://express-games-backend-rest-api.herokuapp.com/";
+
+const loadGames = async () => {
+  const response = await fetch(BASEURL);
+  const gameData = await response.json();
+  return gameData
+};
+const data = loadGames();
 
 const GameDataContext = createContext(null);
 export { GameDataContext, data };
