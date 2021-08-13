@@ -28,15 +28,6 @@ const Editing = () => {
     fetchData();
   }, []);
 
-  //controlling edit status:
-  const SucessEdit = () => {
-    if (editStatus) {
-      return <p className="nearWhite">Editado com sucesso.</p>;
-    } else {
-      return null;
-    }
-  };
-
   //editing:
   const editItem = (e) => {
     setUpdatedItem({
@@ -67,6 +58,15 @@ const Editing = () => {
       submitData();
     } else if (operation == "delete") {
       deleteData();
+    }
+  };
+
+  //controlling edit status:
+  const SucessEdit = () => {
+    if (editStatus) {
+      return <p className="nearWhite">Editado com sucesso.</p>;
+    } else {
+      return null;
     }
   };
 

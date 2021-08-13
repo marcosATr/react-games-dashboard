@@ -9,7 +9,7 @@ function LoginInfo({ setStyles }) {
         <Link to="/cadastrar" className="font-small white tdn">
           Cadastrar
         </Link>
-        <img className="ml1" src={"faceimage.png"} />
+        <img className="ml1" src={"/faceimage.png"} />
       </div>
     </>
   );
