@@ -82,7 +82,7 @@ const Editing = () => {
               placeholder="Nome do Jogo"
               type="text"
               name="title"
-              value={updatedItem.title}
+              value={updatedItem.title || ""}
               onChange={(e) => {
                 editItem(e);
               }}
@@ -94,7 +94,7 @@ const Editing = () => {
               placeholder="Gênero"
               type="text"
               name="genre"
-              value={updatedItem.genre}
+              value={updatedItem.genre || ""}
               onChange={(e) => {
                 editItem(e);
               }}
@@ -106,7 +106,7 @@ const Editing = () => {
               placeholder="Plataforma"
               type="text"
               name="platform"
-              value={updatedItem.platform}
+              value={updatedItem.platform || ""}
               onChange={(e) => {
                 editItem(e);
               }}
@@ -118,7 +118,7 @@ const Editing = () => {
               placeholder="Data Prevista"
               type="text"
               name="release"
-              value={updatedItem.release}
+              value={updatedItem.release || ""}
               onChange={(e) => {
                 editItem(e);
               }}
