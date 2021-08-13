@@ -20,6 +20,17 @@
 .table tr:last-child td {
   border-bottom: 0;
 }
+.gameImageSmall {
+  max-height: 80px;
+}
+.gameImageSmall img {
+  max-height: inherit;
+  margin-right: 10px;
+}
+.linkWithImage {
+  display: flex;
+  align-items: center;
+}
 @media (max-width: 768px) {
   .table {
     margin-top: 0;

@@ -23,9 +23,7 @@ const ListSingle = () => {
   return (
     <div className="box p2 flex column">
       <div className="flex row wrap">
-        <div className="p2">
-          <img src={"https://via.placeholder.com/150x250"} />
-        </div>
+        <div className="p2 hasImage">{game.image && <img src={game.image} />}</div>
         <div className="nearWhite p2">
           <h1>{game.title}</h1>
           <p>{game.genre}</p>

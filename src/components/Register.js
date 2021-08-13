@@ -7,35 +7,7 @@ const Register = () => {
   //status of the from
   const BASEURL = "https://express-games-backend-rest-api.herokuapp.com/";
 
-  // const [games, setGames] = useState([]);
-
-  // const loadGames = async () => {
-  //   const res = await fetch(BASEURL);
-  //   const gameData = await res.json();
-  //   setGames(gameData);
-  //   console.log(gameData.length);
-  // };
-
-  // useEffect(() => {
-  //   loadGames();
-  // }, []);
-
-  //Finding the next available id:
-  // const allRegisteredIds = games.map(game => {
-  //   return game.id;
-  // });
-
-  // const findAvailable = () => {
-  //   let nextId;
-  //   const length = allRegisteredIds.length;
-  //   for (let i = 1; i <= length + 1; i++) {
-  //     if (allRegisteredIds.includes(i)) {
-  //     } else {
-  //       nextId = i;
-  //     }
-  //   }
-  //   return nextId;
-  // };
+  
 
   //monitoring and getting fields data
   const [newItem, setNewItem] = useState({});
@@ -96,6 +68,18 @@ const Register = () => {
           placeholder="Nome do Jogo"
           type="text"
           name="title"
+          required
+          onChange={(e) => {
+            updateNewItem(e);
+          }}
+        />
+      </div>
+      <div className="registerPage">
+        <input
+          className="inputBasic"
+          placeholder="Imagem"
+          type="text"
+          name="image"
           required
           onChange={(e) => {
             updateNewItem(e);

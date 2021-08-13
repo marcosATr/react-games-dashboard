@@ -91,6 +91,18 @@ const Editing = () => {
           <div className="registerPage">
             <input
               className="inputBasic mv1"
+              placeholder="Imagem"
+              type="text"
+              name="image"
+              value={updatedItem.image || ""}
+              onChange={(e) => {
+                editItem(e);
+              }}
+            />
+          </div>
+          <div className="registerPage">
+            <input
+              className="inputBasic mv1"
               placeholder="Gênero"
               type="text"
               name="genre"

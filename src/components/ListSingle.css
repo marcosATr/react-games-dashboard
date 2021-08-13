@@ -1,0 +1,13 @@
+.hasImage {
+  width: 300px;
+  margin-right: 20px;
+}
+.hasImage img {
+  width: inherit;
+}
+@media (max-width: 768px) {
+  .hasImage {
+    width: 100%;
+    margin-right: 0;
+  }
+}

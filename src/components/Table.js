@@ -34,7 +34,14 @@ function Table() {
             {games.map((game) => (
               <tr key={game._id}>
                 <td>
-                  <Link to={`/${game._id}`}>{game.title}</Link>
+                  <Link to={`/${game._id}`} className="linkWithImage">
+                    {game.image && (
+                      <div className="gameImageSmall">
+                        <img src={game.image} />
+                      </div>
+                    )}
+                    {game.title}
+                  </Link>
                 </td>
                 <td>{game.genre}</td>
                 <td>{game.platform}</td>
