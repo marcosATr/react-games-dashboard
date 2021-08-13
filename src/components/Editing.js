@@ -3,61 +3,70 @@ import { useParams, Link } from "react-router-dom";
 import "./Editing.css";
 
 const Editing = () => {
-  const BASEURL = "https://express-games-backend-rest-api.herokuapp.com/";
+  const baseUrl = "https://express-games-backend-rest-api.herokuapp.com/";
 
-  const [games, setGames] = useState([]);
-
-  //controlling action edit action
+  //controlling the current game state
+  const [game, setGame] = useState([]);
+  const [updatedItem, setUpdatedItem] = useState([]);
+  //edit status:
   const [editStatus, setEditStatus] = useState(false);
 
+  //Getting url params
   const { id } = useParams();
-  const loadGames = async () => {
-    const res = await fetch(`${BASEURL}${id}`);
-    const gameData = await res.json();
-    setGames([{ ...gameData }]);
-  };
-  
+  console.log(id, typeof id);
+
   useEffect(() => {
-    loadGames();
+    const fetchData = async () => {
+      const result = await fetch(`${baseUrl}${id}`).then((response) =>
+        response.json()
+      );
+      setGame(result);
+      //set temporary items as identical do fetched data before edit starts
+      setUpdatedItem(result);
+      console.log("fetch executed");
+    };
+    fetchData();
   }, []);
-  
-const game = games[0]
 
-  const editItem = (e) => {
-    setGames([{
-      ...game,
-      [e.target.name]: e.target.value,
-    }]);
-  };
-
-  const saveItem = async (operation) => {
-    //removing the item that is being edited:
-
-    if (operation == "save") {
-      // newGames.push(tempEdit);
-      // setGames(newGames);
-      setEditStatus(true);
-      await fetch(`${BASE_URL}${id}/`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...tempEdit,
-        }),
-      });
-    } else if (operation == "delete") {
-      await fetch(`${BASE_URL}${id}`, {
-        method: "DELETE",
-      });
-    }
-  };
-
+  //controlling edit status:
   const SucessEdit = () => {
     if (editStatus) {
       return <p className="nearWhite">Editado com sucesso.</p>;
     } else {
       return null;
+    }
+  };
+
+  //editing:
+  const editItem = (e) => {
+    setUpdatedItem({
+      ...updatedItem,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submitData = async () => {
+    console.log(updatedItem);
+    await fetch(`${baseUrl}${id}/edit`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedItem),
+    }).then(setEditStatus(true));
+  };
+
+  const deleteData = async () => {
+    await fetch(`${baseUrl}${id}/edit`, {
+      method: "DELETE",
+    });
+  };
+
+  const saveItem = (operation) => {
+    if (operation == "save") {
+      submitData();
+    } else if (operation == "delete") {
+      deleteData();
     }
   };
 
@@ -73,7 +82,7 @@ const game = games[0]
               placeholder="Nome do Jogo"
               type="text"
               name="title"
-              value={games[0].title}
+              value={updatedItem.title}
               onChange={(e) => {
                 editItem(e);
               }}
@@ -85,7 +94,7 @@ const game = games[0]
               placeholder="Gênero"
               type="text"
               name="genre"
-              value={game.genre}
+              value={updatedItem.genre}
               onChange={(e) => {
                 editItem(e);
               }}
@@ -97,7 +106,7 @@ const game = games[0]
               placeholder="Plataforma"
               type="text"
               name="platform"
-              value={game.platform}
+              value={updatedItem.platform}
               onChange={(e) => {
                 editItem(e);
               }}
@@ -109,7 +118,7 @@ const game = games[0]
               placeholder="Data Prevista"
               type="text"
               name="release"
-              value={game.release}
+              value={updatedItem.release}
               onChange={(e) => {
                 editItem(e);
               }}
@@ -123,7 +132,7 @@ const game = games[0]
               Cancelar
             </Link>
             <Link
-              to=""
+              to={`/${id}/edit`}
               className="button mh2"
               onClick={() => {
                 saveItem("save");

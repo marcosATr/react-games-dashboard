@@ -32,7 +32,7 @@ function Table() {
           </thead>
           <tbody className="font-small">
             {games.map((game) => (
-              <tr key={game.id}>
+              <tr key={game._id}>
                 <td>
                   <Link to={`/${game._id}`}>{game.title}</Link>
                 </td>

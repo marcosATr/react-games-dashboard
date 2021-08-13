@@ -73,14 +73,14 @@ const Register = () => {
           <p className="nearWhite">
             Por favor, preencha os campos corretamente.
           </p>
-          <Link className="button" onClick={() => submitGame()}>
+          <Link to="/cadastrar" className="button" onClick={() => submitGame()}>
             Cadastrar
           </Link>
         </>
       );
     } else {
       return (
-        <Link className="button" onClick={() => submitGame()}>
+        <Link to="/cadastrar" className="button" onClick={() => submitGame()}>
           Cadastrar
         </Link>
       );
